@@ -60,6 +60,8 @@ def createfile(filename, default_value):
 
 
 def get_date(str_format=False,date_modifier=0):
+    today = str(datetime.today().date())
+    createfile("date.txt", today)
     with open("date.txt", "r") as file:
         file = file.read()
         current_date = datetime.strptime(file, '%Y-%m-%d').date()
@@ -290,7 +292,7 @@ def calc_stock(product_code, ordered_amount, date=get_date(), buy_code = 0, toda
     return return_list
 
 
-def today_activity(date=get_date(), product_code=0):
+def today_activity(date=get_date(), product_code=False):
     return_list = []
     #Returns nested list of items bought, sold or expired (in that order) on given date
     if type(date) == "str":
@@ -348,7 +350,18 @@ def today_activity(date=get_date(), product_code=0):
     return return_list
 
 
+
 def report_manager(namespace):
+    # Getting the product code, if a product name was given it's product code is taken from products.csv
+    if namespace.product:
+        df = pd.read_csv("products.csv", index_col="product name")
+        try:
+            product_code = int(namespace.product)
+        except ValueError:
+            product_code = df.loc[namespace.product, 'product code']
+
+
+    # Getting the date if today is entered. If another date is given checks to see it's valid.
     if namespace.date.lower() =="today":
         report_date = get_date(str_format=True)
     else:
@@ -357,9 +370,10 @@ def report_manager(namespace):
             report_date = namespace.date
         except ValueError:
             return print(f"Invalid date: {namespace.date}\nHas to be a possible date in format: YYYY-MM-DD")
+        
+
     if report_date:
-        report_activity = today_activity(report_date)
-        print(report_activity)
+        report_activity = today_activity(report_date, product_code)
         if report_activity[0]:
             print(f"Products bought on {report_date}:")
             for report_name, report_buy_code, report_product_code, report_amount in report_activity[0]:
@@ -372,9 +386,10 @@ def report_manager(namespace):
             print(f"Products expired on {report_date}:")
             for report_name, report_buy_code, report_product_code, report_amount in report_activity[2]:
                 print(f"Product: {report_name}({report_product_code}), amount: {report_amount}, buy code: {report_buy_code}")
+
+
+
 def main():
-    today = str(datetime.today().date())
-    createfile("date.txt", today)
     createfile("products.csv", ["product name", "product code", "default buy price",
                "default sell price", "default expiracy time"])
     createfile("transactions.csv", ["buy code", "buy/sell", "product name", "product code", "amount",
@@ -531,7 +546,7 @@ def main():
         help="Enter the date you wish to receive report from (YYYY-MM-DD), type today for current date",
     )
     report_product_parser.add_argument(
-        "product",
+        "-p", "--product",
         help="Enter the product name or product code of the product you want to receive report from",
     )
     parsed_args = parser.parse_args()
