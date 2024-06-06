@@ -1,15 +1,16 @@
 product name,product code,default buy price,default sell price,default expiracy time
-bob7,54736,0.0,0,0
-banana,84581,0.0,0,0
-banan,55291,0.0,0,0
-bana,63960,69.0,0,0
-ban,96907,0.0,0,0
-babayaga,62357,0.0,0,0
-badhe,47022,0.0,0,0
-badhedbfd,54945,0.0,0,0
-badhedbf\,91793,0.0,0,0
-bgs,63961,0.0,0,0
-dsfgaed,19406,0.0,0,0
-dsfgae,28203,0.0,0,0
-7zx44,12500,69.0,200,6
-banana45,35694,0.0,0,0
+apple,56687,0.5,1.0,7
+bread,12500,1.0,1.5,5
+milk,21803,0.8,1.2,10
+eggs,18894,1.5,2.0,14
+cheese,92390,2.0,3.0,30
+butter,77801,1.2,1.8,20
+carrot,71000,0.3,0.5,14
+chicken breast,13248,5.0,7.0,7
+pasta,34933,0.9,1.5,365
+rice,893738,1.0,1.8,365
+tomato,93748,0.4,0.8,10
+orange juice,23417,1.0,1.5,20
+cereal,75483,2.5,3.5,180
+potato,50014,0.5,1.0,30
+yogurt,18075,0.6,1.0,14
