@@ -1,5 +1,5 @@
-product name,product code,default buy price,default sell price,default expiracy time
-apple,56687,0.5,1.0,7
+product name,product code,default buy price,default sell price,expiracy time in days
+apple,56687,0.5,1.0,8
 bread,12500,1.0,1.5,5
 milk,21803,0.8,1.2,10
 eggs,18894,1.5,2.0,14

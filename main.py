@@ -12,7 +12,7 @@ __human_name__ = "superpy"
 
 def main():
     createfile("products.csv", ["product name", "product code", "default buy price",
-               "default sell price", "default expiracy time"])
+               "default sell price", "expiracy time in days"])
     createfile("transactions.csv", ["buy code", "buy/sell", "product name", "product code", "amount",
                              "price", "buy date","expiracy date", "sell date"])
     parser = argparse.ArgumentParser(

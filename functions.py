@@ -124,6 +124,7 @@ def product_manager(namespace):
             print(f"Added product: {namespace.name}")
     elif namespace.subparser_name == "add" and not new_product:
         print(f"Cannot add product: {namespace.name} as it already exists")
+        
     # Handles change product subparser
     df = pd.read_csv("products.csv")
     if namespace.subparser_name == "change" and not new_product:
@@ -173,7 +174,7 @@ def product_manager(namespace):
             df.loc[product_row,
                    'expiracy time in days'] = namespace.expiracy_time
             print(
-                f"Product: {product_name} default expiracy time has been set to: {namespace.expiracy_time} days.")
+                f"Product: {product_name} expiracy time in days has been set to: {namespace.expiracy_time} days.")
             selected_something = True
         elif namespace.delete:
             df = df.drop(labels=product_row, axis=0)
@@ -221,7 +222,7 @@ def transactions_manager(namespace):
             product_code = product_df.loc[product_row, 'product code']
             buy_price = product_df.loc[product_row,'default buy price'] if not namespace.buy_price else namespace.buy_price
             buy_code = buy_code_generator(current_date, product_code)
-            expiracy_time = product_df.loc[product_row, 'default expiracy time'] if not namespace.expiracy_time else namespace.expiracy_time
+            expiracy_time = product_df.loc[product_row, 'expiracy time in days'] if not namespace.expiracy_time else namespace.expiracy_time
             expiracy_date = get_date(str_format=True,date_modifier= expiracy_time)
             with open("transactions.csv", 'a', newline='') as file:
                 writer = csv.writer(file)
